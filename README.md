@@ -1,19 +1,44 @@
 # neuro-cim-tile
 
-> Multi-Technology Compute-in-Memory (CIM) Core with D-CIM CMOS & NVM Macro Modeling (NeuroSim & TransCIM Inspired).
+<!-- BEGIN GENERATED PROJECT GUIDE -->
 
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
-[![Framework: NeuroSim & TransCIM](https://img.shields.io/badge/inspired%20by-NeuroSim%20v1.5%20%7C%20TransCIM-purple)](#)
-[![Devices: SRAM | RRAM | FeFET | PCM](https://img.shields.io/badge/devices-SRAM%20%7C%20RRAM%20%7C%20FeFET%20%7C%20PCM-orange)](#)
+## Purpose and first steps
 
-## Overview
-`neuro-cim-tile` is a device-configurable Compute-in-Memory (CIM) macro core inspired by **NeuroSim v1.5** and **TransCIM**. It couples a synthesizable digital periphery (row decoders, shift-and-add accumulators, activation/quantization units) with a pluggable synaptic crossbar supporting both standard D-CIM CMOS (SRAM) and behavioral NVM macros (RRAM, FeFET, PCM).
+Specify a proposed compute-in-memory tile and its digital/device-model boundaries.
 
-## Key Features
-- **Pluggable Cell Technology (`DEVICE_TECH`)**:
-  - `0`: Pure synthesizable D-CIM CMOS (SRAM logic).
-  - `1`: Behavioral RRAM (1T1R non-linear filament conductance).
-  - `2`: Behavioral FeFET (multi-level remnant polarization & threshold voltage shifts).
-  - `3`: Behavioral PCM (amorphous/crystalline resistance states).
-- **Shift-and-Add Accumulation**: Collects bitline partial sums across bit-serial cycles into a 16-bit result.
-- **Configurable Activation**: ReLU (standard CNNs/MLPs) and Linear Pass-Through (TransCIM attention projections).
+**Who it is for:** Researchers planning the boundaries between digital accumulation and CIM device models.
+
+**First task:** Trace the proposed row-driver, crossbar, accumulator, and activation interfaces.
+
+**What to expect:** A hierarchy/interface proposal for a future tile model and digital implementation.
+
+**Current scope:** Architecture draft only. RTL, behavioral device models, calibration data, and verification are future work.
+
+**Start here:** [Tile hierarchy proposal](ARCHITECTURE.md).
+
+**Related projects:** [cim-bit-serial-pe](https://github.com/zesun33/cim-bit-serial-pe), [lif-spiking-core](https://github.com/zesun33/lif-spiking-core).
+
+[Choose another project](https://github.com/zesun33/personal-projects/blob/main/GETTING_STARTED.md).
+<!-- END GENERATED PROJECT GUIDE -->
+
+Architecture proposal for a compute-in-memory tile combining digital control/accumulation with a future device-model interface.
+
+## Current implementation
+
+This repository currently contains this README and [ARCHITECTURE.md](ARCHITECTURE.md). The tile hierarchy is specified as a proposal; RTL, device models, calibration data, and executable tests are not present.
+
+## Why study this design?
+
+A tile needs a clear boundary between digital arithmetic and the behavior of its weight storage. Separating row sequencing, crossbar output, column accumulation, and activation makes those assumptions visible before implementation.
+
+## Proposed features
+
+- Bit-serial row sequencing and column accumulation.
+- A device selector for SRAM, RRAM, FeFET, or PCM studies.
+- Shift-and-add accumulation, quantization, bias, and ReLU or linear output modes.
+
+These are design goals. Mentioning a device technology does not establish a calibrated device model or measured physical behavior. NeuroSim and TransCIM are conceptual references; no integration is implemented here.
+
+## Next concrete milestone
+
+Implement and check the digital periphery against a software reference first. Add behavioral device models only with explicit assumptions, calibration evidence, and separate validation.

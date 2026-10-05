@@ -1,5 +1,7 @@
 # neuro-cim-tile: Architectural Specification
 
+This is a proposed interface/dataflow specification. RTL and executable validation are not yet implemented in this repository.
+
 ## 1. Top-Level Hierarchy
 1. `cim_row_driver`: Bit-serial activation sequencer and wordline pulse generator.
 2. `cim_crossbar_macro`: $M \times N$ array with parameter `DEVICE_TECH` (SRAM, RRAM, FeFET, PCM).
